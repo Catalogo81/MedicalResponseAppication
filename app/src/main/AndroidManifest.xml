@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalResponseApp">
         <activity
+            android:name=".Login.Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".Login.Login"
+            android:exported="false" />
+        <activity
+            android:name=".Registration.Registration"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
