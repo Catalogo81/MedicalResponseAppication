@@ -1,4 +1,4 @@
-package com.example.medicalresponseapp;
+package com.example.medicalresponseapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.medicalresponseapp.Login.Dashboard;
-import com.example.medicalresponseapp.Login.Login;
+import com.example.medicalresponseapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

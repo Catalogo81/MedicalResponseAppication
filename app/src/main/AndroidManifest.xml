@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalResponseApp">
         <activity
-            android:name=".Login2"
-            android:exported="false" />
-        <activity
-            android:name=".Login.Dashboard"
+            android:name=".Activities.Dashboard"
             android:exported="false" />
         <activity
             android:name=".Login.Login"
@@ -22,7 +19,7 @@
             android:name=".Registration.Registration"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

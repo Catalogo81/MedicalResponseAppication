@@ -5,60 +5,60 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.medicalresponseapp.Login2;
+import com.example.medicalresponseapp.Activities.Dashboard;
 import com.example.medicalresponseapp.R;
-import com.example.medicalresponseapp.User;
+import com.example.medicalresponseapp.Classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener
 {
     private FirebaseAuth mAuth;
-    private EditText edtEmailAddress, edtPersonName,edtPersonSurname,edtGender,edtIdentityNumber,edtPostalAddress,edtPassword,edtPasswordRetype;
-    private Button btnRegister;
-    private ImageButton BtnPic;
+    private EditText etEmailAddress, etPersonName, etPersonSurname, etGender, etIdentityNumber,
+            etPostalAddress, etPassword, etPasswordRetype;
+    private Button btnLogin, btnRegister;
     private ProgressBar progressBar;
 
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+    DatabaseReference reference;
+
+    String stringID, userID;
+
     @Override
-
-    protected void onCreate(Bundle savedInstanceState)
-    {
-
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        //Firebase authentication
         mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
 
-
-
-        edtGender=(EditText)findViewById(R.id.edtGender);
-        edtEmailAddress=(EditText)findViewById(R.id.edtEmailAddress);
-        edtPassword=(EditText)findViewById(R.id.edtPassword);
-        edtPasswordRetype=(EditText)findViewById(R.id.edtPasswordRetype);
-        edtPersonName=(EditText)findViewById(R.id.edtPersonName);
-        edtPersonSurname=(EditText)findViewById(R.id.edtPersonSurname);
-        edtPostalAddress=(EditText)findViewById(R.id.edtPostalAddress);
-        edtIdentityNumber=(EditText)findViewById(R.id.edtIdentityNumber);
-        btnRegister=(Button) findViewById(R.id.btnRegister);
-        BtnPic=findViewById(R.id.BtnPic);
+        etGender = (EditText)findViewById(R.id.etGender);
+        etEmailAddress = (EditText)findViewById(R.id.etEmailAddress);
+        etPassword = findViewById(R.id.etPassword);
+        etPasswordRetype = findViewById(R.id.etPasswordRetype);
+        etPersonName = findViewById(R.id.etPersonName);
+        etPersonSurname = findViewById(R.id.etPersonSurname);
+        etPostalAddress = findViewById(R.id.etPostalAddress);
+        etIdentityNumber = findViewById(R.id.etIdentityNumber);
+        btnRegister = findViewById(R.id.btnRegister);
+        btnLogin = findViewById(R.id.btnLogin);
 
         progressBar=findViewById(R.id.progressBar);
 
-        BtnPic.setOnClickListener(this);
+        //BtnPic.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
 
     }
@@ -66,9 +66,9 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.BtnPic:
-                startActivity(new Intent(this, Login2.class));
-                break;
+//            case R.id.BtnPic:
+//                startActivity(new Intent(this, Login2.class));
+//                break;
             case R.id.btnRegister:
                 btnRegister();
                 break;
@@ -77,67 +77,67 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     }
 
     private void btnRegister() {
-        String ID= edtIdentityNumber.getText().toString().trim();
-        String name= edtPersonName.getText().toString().trim();
-        String password= edtPassword.getText().toString().trim();
-        String gender= edtGender.getText().toString().trim();
-        String surname= edtPersonSurname.getText().toString().trim();
-        String address=edtPostalAddress.getText().toString().trim();
-        String passwordretype= edtPasswordRetype.getText().toString().trim();
-        String email=edtEmailAddress.getText().toString().trim();
+        String id = etIdentityNumber.getText().toString().trim();
+        String name = etPersonName.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String gender = etGender.getText().toString().trim();
+        String surname = etPersonSurname.getText().toString().trim();
+        String address = etPostalAddress.getText().toString().trim();
+        String passwordRetype = etPasswordRetype.getText().toString().trim();
+        String email = etEmailAddress.getText().toString().trim();
 
         if (name.isEmpty()){
-            edtPersonName.setError("Full name is required!");
-            edtPersonName.requestFocus();
+            etPersonName.setError("Full name is required!");
+            etPersonName.requestFocus();
             return;
         }
 
-        if (ID.isEmpty()){
-            edtIdentityNumber.setError("Identity number is required!");
-            edtIdentityNumber.requestFocus();
+        if (id.isEmpty()){
+            etIdentityNumber.setError("Identity number is required!");
+            etIdentityNumber.requestFocus();
             return;
         }
 
         if (password.isEmpty()){
-            edtPassword.setError("Password is required!");
-            edtPassword.requestFocus();
+            etPassword.setError("Password is required!");
+            etPassword.requestFocus();
             return;
         }
 
         if (gender.isEmpty()){
-            edtGender.setError("Gender is required!");
-            edtGender.requestFocus();
+            etGender.setError("Gender is required!");
+            etGender.requestFocus();
             return;
         }
 
         if (surname.isEmpty()){
-            edtPersonSurname.setError("Surname is required!");
-            edtPersonSurname.requestFocus();
+            etPersonSurname.setError("Surname is required!");
+            etPersonSurname.requestFocus();
             return;
         }
 
         if (address.isEmpty()){
-            edtPostalAddress.setError("Address is required!");
-            edtPostalAddress.requestFocus();
+            etPostalAddress.setError("Address is required!");
+            etPostalAddress.requestFocus();
             return;
         }
-        if (passwordretype.isEmpty()){
-            edtPasswordRetype.setError("Please retype your password!");
-            edtPasswordRetype.requestFocus();
+        if (passwordRetype.isEmpty()){
+            etPasswordRetype.setError("Please retype your password!");
+            etPasswordRetype.requestFocus();
             return;
         }
 
         if (password.length()<6)
         {
-            edtPassword.setError("Min password length should be 6 characters!");
-            edtPassword.requestFocus();
+            etPassword.setError("Min password length should be 6 characters!");
+            etPassword.requestFocus();
             return;
 
         }
 
         if (email.isEmpty()){
-            edtEmailAddress.setError("Email is required!");
-            edtEmailAddress.requestFocus();
+            etEmailAddress.setError("Email is required!");
+            etEmailAddress.requestFocus();
             return;
         }
 
@@ -147,11 +147,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             return;
         }*/
 
-
-
-
-
-
+        btnRegister.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -159,7 +155,12 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            User user = new User(name, surname, gender, password, passwordretype, address, ID, email);
+
+                            //gets the user id of the current logged in user
+                            userID = mAuth.getCurrentUser().getUid();
+                            //id = userID;
+                            stringID = userID;
+                            User user = new User(stringID, name, surname, id, password, passwordRetype, address, gender, email);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -170,10 +171,11 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                         Toast.makeText(Registration.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
 
-                                        //redirect to login layout!
+                                        //redirect to Dashboard layout!
+                                        startActivity(new Intent(Registration.this, Dashboard.class));
 
                                     } else {
-                                        Toast.makeText(Registration.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Registration.this, "Error: " + task.getException(), Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
 
                                     }
@@ -182,7 +184,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
 
                         } else {
-                            Toast.makeText(Registration.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Registration.this, "Error: " + task.getException(), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
