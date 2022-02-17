@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "722069653353",
+    "project_id": "medicalresponseapp",
+    "storage_bucket": "medicalresponseapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722069653353:android:a26e1990540a99b83f1ff8",
+        "android_client_info": {
+          "package_name": "com.example.medicalresponseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722069653353-vb2e9feacilo326oaa0mq4i3dfbrrbo6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVx1LCx85LjYvy7UpOzfEZh_Uj48O-nr4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722069653353-vb2e9feacilo326oaa0mq4i3dfbrrbo6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,7 +8,7 @@
     tools:context=".Registration.Registration">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/BtnPic"
         android:layout_width="match_parent"
         android:layout_height="233dp"
         app:srcCompat="@drawable/emergency_icon" />
@@ -29,45 +29,53 @@
         android:layout_height="wrap_content"
         android:height="52dp"
         android:ems="10"
+        android:hint="Name"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Name" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/edtPersonSurname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Surname"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Surname" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/edtGender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Gender"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Gender" />
+        android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/edtIdentityNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Identity Number"
         android:inputType="number"
-        android:minHeight="48dp"
-        android:text="Identity Number" />
+        android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/editTextTextPostalAddress"
+        android:id="@+id/edtEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/edtPostalAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Postal Address"
         android:inputType="textPostalAddress"
-        android:minHeight="48dp"
-        tools:text="Postal Address" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/edtPassword"
@@ -93,4 +101,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button"
         android:text="REGISTER" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
