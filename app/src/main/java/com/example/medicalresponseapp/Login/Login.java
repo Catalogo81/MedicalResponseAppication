@@ -37,16 +37,4 @@ public class Login extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public void onClick(View v) {
-//
-//        switch (v.getId())
-//        {
-//            case R.id.tvLRegister:
-//                startActivity(new Intent(this, Registration.class));
-//                break;
-//        }
-//
-//    }
-
 }

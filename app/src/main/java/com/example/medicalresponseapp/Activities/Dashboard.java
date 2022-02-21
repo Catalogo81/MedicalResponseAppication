@@ -2,6 +2,7 @@ package com.example.medicalresponseapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -28,6 +29,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
     ImageView ivProfilePhoto, ivLocationIcon;
     TextView tvUserName, tvRegister, tvLogin;
+    CardView cvHospital;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -46,6 +48,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         tvUserName = findViewById(R.id.tvUserName);
         tvRegister = findViewById(R.id.tvRegister);
         tvLogin = findViewById(R.id.tvLogin);
+        cvHospital = findViewById(R.id.cvHospital);
 
         /*--------------------Firebase Instance retrievals----------------------*/
         firebaseAuth = FirebaseAuth.getInstance();
@@ -54,6 +57,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         //gets the user that is currently logged in
         userID = firebaseAuth.getCurrentUser().getUid();
 
+        //method that reads the current users data
         readUserData();
 
         ivProfilePhoto.setOnClickListener(view ->
@@ -69,6 +73,14 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         tvLogin.setOnClickListener(view ->
               //  Toast.makeText(Dashboard.this, "Login Clicked", Toast.LENGTH_SHORT).show());
         startActivity(new Intent(Dashboard.this, Login.class)));
+
+        cvHospital.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(Dashboard.this, "Hospital clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Dashboard.this, Login.class));
+            }
+        });
     }
 
     @Override
