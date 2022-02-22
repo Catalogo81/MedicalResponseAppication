@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
 
     ImageView ivProfilePhoto, ivLocationIcon;
-    TextView tvUserName, tvRegister, tvLogin;
+    TextView tvUserName, tvRegister, tvLogin, tvLogout;
     CardView cvHospital;
 
     FirebaseAuth firebaseAuth;
@@ -48,6 +48,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         tvUserName = findViewById(R.id.tvUserName);
         tvRegister = findViewById(R.id.tvRegister);
         tvLogin = findViewById(R.id.tvLogin);
+        tvLogout = findViewById(R.id.tvLogout);
         cvHospital = findViewById(R.id.cvHospital);
 
         /*--------------------Firebase Instance retrievals----------------------*/
@@ -74,6 +75,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
               //  Toast.makeText(Dashboard.this, "Login Clicked", Toast.LENGTH_SHORT).show());
         startActivity(new Intent(Dashboard.this, Login.class)));
 
+        tvLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               logout();
+            }
+        });
+
         cvHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +89,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 startActivity(new Intent(Dashboard.this, Login.class));
             }
         });
+
+        if(!userID.isEmpty())
+        {
+            tvLogin.setVisibility(View.GONE);
+            tvLogout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -139,5 +153,14 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onBackPressed() {
             super.onBackPressed();
+    }
+
+    private void logout()
+    {
+        Toast.makeText(this, "User Logged Out...", Toast.LENGTH_SHORT).show();
+
+        FirebaseAuth.getInstance().signOut();//used for logging out the user
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
     }
 }

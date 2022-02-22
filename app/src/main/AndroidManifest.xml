@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalResponseApp">
         <activity
+            android:name=".Activities.Profile"
+            android:exported="false" />
+        <activity
+            android:name=".Login.ForgotPassword"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Dashboard"
             android:exported="false" />
         <activity

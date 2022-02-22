@@ -2,21 +2,19 @@ package com.example.medicalresponseapp.Classes;
 
 public class User {
 
-    public String stringID, name, surname, id, password, passwordRetype, address, gender, email;
+    public String stringID, name, surname, id, address, gender, email;
 
     public User()
     {
 
     }
 
-    public User(String stringID, String name, String surname, String id, String password, String passwordRetype, String address, String gender, String email )
+    public User(String stringID, String name, String surname, String id, String address, String gender, String email )
     {
         this.stringID = stringID;
         this.address = address;
         this.gender = gender;
         this.id = id;
-        this.passwordRetype = passwordRetype;
-        this.password = password;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -52,22 +50,6 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPasswordRetype() {
-        return passwordRetype;
-    }
-
-    public void setPasswordRetype(String passwordRetype) {
-        this.passwordRetype = passwordRetype;
     }
 
     public String getAddress() {

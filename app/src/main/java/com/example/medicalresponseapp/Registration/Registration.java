@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener
 {
@@ -33,6 +34,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     DatabaseReference reference;
+    FirebaseFirestore firestore;
 
     String stringID, userID;
 
@@ -61,6 +63,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         //BtnPic.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
 
+        //Firebase authentication
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        firestore = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -160,7 +166,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                             userID = mAuth.getCurrentUser().getUid();
                             //id = userID;
                             stringID = userID;
-                            User user = new User(stringID, name, surname, id, password, passwordRetype, address, gender, email);
+                            User user = new User(stringID, name, surname, id, address, gender, email);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
